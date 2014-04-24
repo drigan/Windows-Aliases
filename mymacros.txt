@@ -1,0 +1,49 @@
+;= Git Commands
+ga=git add --all .
+gb=git branch $*
+gc=git commit -a
+gcout=git checkout $*
+gd=git diff $*
+gl=git log $*
+gm=git merge $*
+gpl=git pull
+gps=git push
+gr=git remote -v
+gs=git status $*
+gunstash=git stash apply $*
+
+;= standard renames
+ll=ls -l
+lla=ls -la
+open=explorer .
+
+;= Program Shortcuts
+iis=%windir%\system32\inetsrv\InetMgr.exe
+remember=gvim %userprofile%\Documents\GitHub\Windows-Aliases\stuff.txt
+
+;= Edit Setting files
+bashrc=gvim %userprofile%\Documents\GitHub\Windows-Aliases\mymacros.txt
+hosts=gvim %windir%\System32\drivers\etc\hosts
+vimrc=gvim "c:\Program Files (x86)\Vim\_vimrc"
+
+;= directory shortcuts 
+home=cd /d %userprofile%
+documents=cd /d %userprofile%\Documents
+downloads=cd /d %userprofile%\Downloads
+gh=cd /d %userprofile%\Documents\GitHub
+
+;= Repositories
+la=cd /d %userprofile%\Documents\GitHub\Latin.America
+naws=cd /d %userprofile%\Documents\GitHub\NAWS
+pp=cd /d %userprofile%\Documents\GitHub\Pioneerpump.com
+rl=cd /d %userprofile%\Documents\GitHub\RedLion
+sa=cd /d %userprofile%\Documents\GitHub\South-Africa
+settings=cd /d %userprofile%\Documents\GitHub\Windows-Aliases
+
+;= :end
+;= rem ******************************************************************
+;= rem * EOF - Don't remove the following line.  It clears out the ';' 
+;= rem * macro. We are using it because there is no support for comments
+;= rem * in a DOSKEY macro file.
+;= rem ******************************************************************
+;=
