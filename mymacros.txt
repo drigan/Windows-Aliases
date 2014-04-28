@@ -4,6 +4,7 @@ gb=git branch $*
 gc=git commit -a
 gcout=git checkout $*
 gd=git diff $*
+gf=git fetch
 gl=git log $*
 gm=git merge $*
 gpl=git pull
@@ -20,6 +21,8 @@ open=explorer .
 ;= Program Shortcuts
 iis=%windir%\system32\inetsrv\InetMgr.exe
 remember=gvim %userprofile%\Documents\GitHub\Windows-Aliases\stuff.txt
+acronym=gvim %userprofile%\Documents\GitHub\Windows-Aliases\acronyms.txt
+quirk=gvim %userprofile%\Documents\GitHub\Windows-Aliases\quirks.txt
 
 ;= Edit Setting files
 bashrc=gvim %userprofile%\Documents\GitHub\Windows-Aliases\mymacros.txt

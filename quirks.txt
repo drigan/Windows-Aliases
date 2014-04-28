@@ -1,0 +1,15 @@
+######################################################################
+############################## XSLT ##################################
+######################################################################
+# &nbsp;
+######################################################################
+Non-breaking Spaces cause XSLT to render HTML tags as HTML rather than XML.
+This is important because some browsers will incorrectly handle XML, however
+there is a better solution:
+
+In the xsl:output tag you will see something like this: 
+<xsl:output method="xml" omit-xml-declaration="yes"/>
+
+Simply change "xml" to "html" and you won't need the "&nbsp;":
+<xsl:output method="html" omit-xml-declaration="yes"/>
+
