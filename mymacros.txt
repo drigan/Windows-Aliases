@@ -11,6 +11,7 @@ gpl=git pull
 gps=git push
 gr=git remote -v
 gs=git status $*
+gunadd=git reset --keep $*
 gunstash=git stash apply $*
 
 ;= standard renames
@@ -36,6 +37,7 @@ downloads=cd /d %userprofile%\Downloads
 gh=cd /d %userprofile%\Documents\GitHub
 
 ;= Repositories
+ff=cd /d %userprofile%\Documents\GitHub\FranklinFueling
 la=cd /d %userprofile%\Documents\GitHub\Latin.America
 naws=cd /d %userprofile%\Documents\GitHub\NAWS
 pp=cd /d %userprofile%\Documents\GitHub\Pioneerpump.com
