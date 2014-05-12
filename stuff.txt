@@ -19,4 +19,12 @@ defaults write com.apple.finder AppleShowAllFiles -bool false
 ######################################################################
 # send information to the umbraco logs
 umbraco.BusinessLogic.Log.Add(umbraco.BusinessLogic.LogTypes.Custom, 787878, "color: ";
+
+
 ######################################################################
+############################### XML ##################################
+######################################################################
+# Prettify XML:
+:%s/></>\r</g
+:0
+=:$
