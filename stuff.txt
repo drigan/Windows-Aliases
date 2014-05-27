@@ -1,11 +1,13 @@
 ######################################################################
 ############################ Mac stuff ###############################
 ######################################################################
-# show hidden files
+# show/hide files
 defaults write com.apple.finder AppleShowAllFiles -bool true
-######################################################################
-# hide hidden files
 defaults write com.apple.finder AppleShowAllFiles -bool false
+
+# Show/hide Bouncing alert
+defaults write com.apple.dock no-bouncing -bool true
+defaults write com.apple.dock no-bouncing -bool false
 
 
 ######################################################################
