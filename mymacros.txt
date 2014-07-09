@@ -10,6 +10,7 @@ gm=git merge $*
 gpl=git pull
 gps=git push
 gr=git remote -v
+grevert=git reset --hard HEAD
 gs=git status $*
 gunadd=git reset --keep $*
 gunstash=git stash apply $*
@@ -37,6 +38,9 @@ downloads=cd /d %userprofile%\Downloads
 gh=cd /d %userprofile%\Documents\GitHub
 
 ;= Repositories
+acme=cd /d %userprofile%\Documents\GitHub\Acme.Site
+babel=cd /d %userprofile%\Documents\GitHub\BabelFish
+china=cd /d %userprofile%\Documents\GitHub\China
 ff=cd /d %userprofile%\Documents\GitHub\FranklinFueling
 la=cd /d %userprofile%\Documents\GitHub\Latin.America
 naws=cd /d %userprofile%\Documents\GitHub\NAWS
@@ -44,6 +48,7 @@ pp=cd /d %userprofile%\Documents\GitHub\Pioneerpump.com
 rl=cd /d %userprofile%\Documents\GitHub\RedLion
 sa=cd /d %userprofile%\Documents\GitHub\South-Africa
 settings=cd /d %userprofile%\Documents\GitHub\Windows-Aliases
+seven=cd /d %userprofile%\Documents\GitHub\Umbraco7
 
 ;= :end
 ;= rem ******************************************************************

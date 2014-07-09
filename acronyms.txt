@@ -1,4 +1,3 @@
 AWS: America's Water Supply
 NAWS: North American Water Supply - Formerly AWS
-PP: Pioneer Pump (A major Franklin partner), or Pioneer Prime (A dry priming
-technology formerly known as "Dry Prime")
+PP: Pioneer Pump (A major Franklin partner), or Pioneer Prime (A dry priming technology formerly known as "Dry Prime")
