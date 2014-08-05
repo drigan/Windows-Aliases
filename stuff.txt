@@ -30,3 +30,27 @@ umbraco.BusinessLogic.Log.Add(umbraco.BusinessLogic.LogTypes.Custom, 787878, "co
 :%s/></>\r</g
 :0
 =:$
+
+
+######################################################################
+############################## NUGET #################################
+######################################################################
+install-package UmbracoCMS
+
+
+
+######################################################################
+############################# UMBRACO ################################
+######################################################################
+#  Open VS
+#  Create New Project
+#  
+install-package UmbracoCMS
+
+
+########################## Customer URL ##############################
+# Edit UrlRewriting.config file:
+C:\Users\landj01\Documents\GitHub\FranklinFueling\www.franklinfueling.com\config\UrlRewriting.config
+# Copy and edit a line to set the new value.
+# Add item to the redirector page: http://www.franklinfueling.com/umbraco/umbraco.aspx#content
+

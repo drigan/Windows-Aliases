@@ -50,7 +50,8 @@ rl=cd /d %userprofile%\Documents\GitHub\RedLion
 sa=cd /d %userprofile%\Documents\GitHub\South-Africa
 settings=cd /d %userprofile%\Documents\GitHub\Windows-Aliases
 seven=cd /d %userprofile%\Documents\GitHub\Umbraco7
-tl=cd /d %userprofile%\Documents\GitHub\TechLab
+fp=cd /d %userprofile%\Documents\GitHub\FranklinPro
+merch=cd /d %userprofile%\Documents\GitHub\RosettaStone\src
 
 ;= :end
 ;= rem ******************************************************************
