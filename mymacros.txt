@@ -51,6 +51,7 @@ sa=cd /d %userprofile%\Documents\GitHub\South-Africa
 settings=cd /d %userprofile%\Documents\GitHub\Windows-Aliases
 seven=cd /d %userprofile%\Documents\GitHub\Umbraco7
 fp=cd /d %userprofile%\Documents\GitHub\FranklinPro
+fp2=cd /d %userprofile%\Documents\GitHub\FranklinPro2
 merch=cd /d %userprofile%\Documents\GitHub\RosettaStone\src
 
 ;= :end

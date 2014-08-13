@@ -1,0 +1,321 @@
+#############################################
+# Getting Started With Django + Heroku:
+#############################################
+############ Environment Setup ##############
+sudo ./postinstall.sh 
+sudo apt-get install libpq-dev python-dev python-pip vim-gnome
+
+#  Install the Heroku toolbelt:
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+heroku keys:add ~/.ssh/id_rsa.pub
+git config --global user.name "Joe Landrigan"
+git config --global user.email "driganx@gmail.com"
+sudo locale-gen en_US
+cd /vagrant/
+mkdir projects
+
+# VirtualEnvWrapper
+sudo pip install virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+echo '# load virtualenvwrapper for python (after custom PATHs)
+venvwrap="virtualenvwrapper.sh"
+/usr/bin/which -s $venvwrap
+if [ $? -eq 0 ]; then
+    venvwrap=`/usr/bin/which $venvwrap`
+    source $venvwrap
+fi' >> .bashrc
+########## End Environment Setup ############
+
+# Django Setup
+cd /vagrant/projects
+mkvirtualenv allauth08
+workon allauth08
+pip install django gunicorn django-toolbelt dj_database-url
+django-admin.py startproject allauth08
+cd allauth08/
+echo "web: gunicorn allauth08.wsgi --log-file -" > Procfile
+# GSWD says to use the following line, but Heroku says to use the previous.
+#echo "web: python manage.py runserver 0.0.0.0:$PORT --noreload" > Procfile
+
+# Requirements:
+mkdir requirements
+echo "-r base.txt
+coverage
+django-debug-toolbar
+django-dotenv
+Sphinx" > requirements/local.txt
+echo "-r base.txt
+coverage" > requirements/test.txt
+echo "-r requirements/production.txt" > requirements.txt
+echo "-r base.txt" > requirements/production.txt
+pip freeze > requirements/base.txt
+
+
+# Git
+git init
+echo "bin/
+include/
+lib/
+*.swp
+*.pyc
+*.pyo" > .gitignore
+git add .
+git commit -am "Initial Commit"
+
+# Heroku
+heroku create
+git push heroku master
+
+# Move the settings to more reasonable locations
+mkdir settings
+mv settings.py settings/base.py
+echo "from settings.base import *
+try:
+    from settings.local import *
+except ImportError:
+    pass
+" > settings/__init__.py
+
+##### End Usable Section #####
+
+echo "# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)" >> allauth08/settings.py
+
+echo "from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())" >> allauth08/wsgi.py
+
+
+#############################################
+# End Getting Started With Django + Heroku.
+#############################################
+
+#############################################
+# Unmodified Heroku:
+#############################################
+mkdir allauth07 && cd allauth07
+virtualenv venv
+source venv/bin/activate
+pip install django-toolbelt
+pip install dj_database-url
+pip install gunicorn
+django-admin.py startproject allauth07 .
+echo "web: gunicorn allauth07.wsgi --log-file -" > Procfile
+pip freeze > requirements.txt
+
+echo "# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)" >> allauth07/settings.py
+
+echo "from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())" >> allauth07/wsgi.py
+
+echo "bin/
+include/
+lib/
+*.swp
+*.pyc
+*.pyo" > .gitignore
+
+git init
+git add .
+git commit -m "Initial Commit"
+
+
+heroku create
+git push heroku master
+heroku run python manage.py syncdb
+
+
+#############################################
+# End Unmodified Heroku.
+#############################################
+
+#############################################
+# Modified Heroku:
+#############################################
+
+mkdir allauth05 && cd allauth05
+virtualenv .
+source bin/activate
+pip install django-toolbelt
+pip install dj_database-url
+pip install gunicorn
+
+django-admin.py startproject allauth05 .
+echo "web: gunicorn allauth05.wsgi --log-file -" > Procfile
+foreman start
+
+echo "# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)" >> allauth05/settings.py
+echo "from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())" >> allauth05/wsgi.py
+
+# Requirements:
+mkdir requirements
+echo "-r base.txt
+coverage
+django-debug-toolbar
+django-dotenv
+Sphinx" > requirements/local.txt
+echo "-r base.txt
+coverage" > requirements/test.txt
+echo "-r requirements/production.txt" > requirements.txt
+echo "-r base.txt" > requirements/production.txt
+pip freeze > requirements/base.txt
+
+echo "bin/
+include/
+lib/
+*.swp
+*.pyc
+*.pyo" > .gitignore
+
+git init
+git add .
+git commit -m "Initial Commit"
+
+heroku create
+git push heroku master
+
+#############################################
+# End Heroku.
+#############################################
+
+
+
+
+
+#############################################
+# Begin Standard.
+#############################################
+
+mkdir allauth05 && cd allauth05
+virtualenv .
+source bin/activate
+pip install django-toolbelt
+django-admin.py startproject allauth05 .
+echo "web: gunicorn allauth05.wsgi --log-file -" > Procfile
+pip install south
+pip install argparse
+pip install django-braces
+pip install django-allauth
+mkdir requirements
+pip freeze > requirements/base.txt
+echo "-r base.txt
+coverage
+django-debug-toolbar
+django-dotenv
+Sphinx" > requirements/local.txt
+echo "-r base.txt
+
+coverage" > requirements/test.txt
+echo "-r requirements/production.txt" > requirements.txt
+echo "-r base.txt
+" > requirements/production.txt
+echo "bin/
+include/
+lib/
+*.swp
+*.pyc
+*.pyo" > .gitignore
+git init
+ga
+gc -m "Initial Commit"
+echo "# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)" >> allauth05/settings.py
+echo "from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())" >> allauth05/wsgi.py
+mkdir allauth05/apps
+touch allauth05/apps/__init__.py
+mkdir allauth05/libs
+touch allauth05/libs/__init__.py
+git add .
+git commit -m 
+heroku create
+git push heroku master
+
+
+
+
+
