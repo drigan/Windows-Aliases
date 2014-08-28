@@ -46,6 +46,7 @@ ignore=cd /d %userprofile%\Documents\GitHub\gitignore
 la=cd /d %userprofile%\Documents\GitHub\Latin.America
 naws=cd /d %userprofile%\Documents\GitHub\NAWS
 pp=cd /d %userprofile%\Documents\GitHub\Pioneerpump.com
+pp2=cd /d %userprofile%\Documents\GitHub\PioneerLive
 rl=cd /d %userprofile%\Documents\GitHub\RedLion
 sa=cd /d %userprofile%\Documents\GitHub\South-Africa
 settings=cd /d %userprofile%\Documents\GitHub\Windows-Aliases

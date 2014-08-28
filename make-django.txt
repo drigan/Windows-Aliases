@@ -8,6 +8,8 @@ sudo apt-get install libpq-dev python-dev python-pip vim-gnome
 #  Install the Heroku toolbelt:
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 heroku keys:add ~/.ssh/id_rsa.pub
+#  If the above didn't work for you, try the following:
+#heroku keys:add 
 git config --global user.name "Joe Landrigan"
 git config --global user.email "driganx@gmail.com"
 sudo locale-gen en_US
@@ -25,14 +27,14 @@ venvwrap="virtualenvwrapper.sh"
 if [ $? -eq 0 ]; then
     venvwrap=`/usr/bin/which $venvwrap`
     source $venvwrap
-fi' >> .bashrc
+fi' >> ~/.bashrc
 ########## End Environment Setup ############
 
 # Django Setup
 cd /vagrant/projects
 mkvirtualenv allauth08
 workon allauth08
-pip install django gunicorn django-toolbelt dj_database-url
+pip install django-toolbelt
 django-admin.py startproject allauth08
 cd allauth08/
 echo "web: gunicorn allauth08.wsgi --log-file -" > Procfile
@@ -40,17 +42,19 @@ echo "web: gunicorn allauth08.wsgi --log-file -" > Procfile
 #echo "web: python manage.py runserver 0.0.0.0:$PORT --noreload" > Procfile
 
 # Requirements:
-mkdir requirements
-echo "-r base.txt
-coverage
-django-debug-toolbar
-django-dotenv
-Sphinx" > requirements/local.txt
-echo "-r base.txt
-coverage" > requirements/test.txt
-echo "-r requirements/production.txt" > requirements.txt
-echo "-r base.txt" > requirements/production.txt
-pip freeze > requirements/base.txt
+pip freeze > requirements.txt
+# GSWD says to use the following lines, but Heroku says to use the previous.
+#mkdir requirements
+#echo "-r base.txt
+#coverage
+#django-debug-toolbar
+#django-dotenv
+#Sphinx" > requirements/local.txt
+#echo "-r base.txt
+#coverage" > requirements/test.txt
+#echo "-r requirements/production.txt" > requirements.txt
+#echo "-r base.txt" > requirements/production.txt
+#pip freeze > requirements/base.txt
 
 
 # Git
@@ -250,12 +254,12 @@ git push heroku master
 # Begin Standard.
 #############################################
 
-mkdir allauth05 && cd allauth05
+mkdir allauth06 && cd allauth06
 virtualenv .
 source bin/activate
 pip install django-toolbelt
-django-admin.py startproject allauth05 .
-echo "web: gunicorn allauth05.wsgi --log-file -" > Procfile
+django-admin.py startproject allauth06 .
+echo "web: gunicorn allauth06.wsgi --log-file -" > Procfile
 pip install south
 pip install argparse
 pip install django-braces
@@ -301,15 +305,15 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-)" >> allauth05/settings.py
+)" >> allauth06/settings.py
 echo "from django.core.wsgi import get_wsgi_application
 from dj_static import Cling
 
-application = Cling(get_wsgi_application())" >> allauth05/wsgi.py
-mkdir allauth05/apps
-touch allauth05/apps/__init__.py
-mkdir allauth05/libs
-touch allauth05/libs/__init__.py
+application = Cling(get_wsgi_application())" >> allauth06/wsgi.py
+mkdir allauth06/apps
+touch allauth06/apps/__init__.py
+mkdir allauth06/libs
+touch allauth06/libs/__init__.py
 git add .
 git commit -m 
 heroku create
