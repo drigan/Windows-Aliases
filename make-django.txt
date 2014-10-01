@@ -64,7 +64,8 @@ include/
 lib/
 *.swp
 *.pyc
-*.pyo" > .gitignore
+*.pyo
+.DS_Store" > .gitignore
 git add .
 git commit -am "Initial Commit"
 
