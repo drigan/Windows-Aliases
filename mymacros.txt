@@ -1,3 +1,4 @@
+editor=gvim
 ;= Git Commands
 ga=git add --all .
 gb=git branch $*
@@ -23,14 +24,14 @@ open=explorer .
 
 ;= Program Shortcuts
 iis=%windir%\system32\inetsrv\InetMgr.exe
-remember=gvim %userprofile%\Documents\GitHub\Windows-Aliases\stuff.txt
-acronym=gvim %userprofile%\Documents\GitHub\Windows-Aliases\acronyms.txt
-quirk=gvim %userprofile%\Documents\GitHub\Windows-Aliases\quirks.txt
+remember=%editor% %userprofile%\Documents\GitHub\Windows-Aliases\stuff.txt
+acronym=%editor% %userprofile%\Documents\GitHub\Windows-Aliases\acronyms.txt
+quirk=%editor% %userprofile%\Documents\GitHub\Windows-Aliases\quirks.txt
 
 ;= Edit Setting files
-bashrc=gvim %userprofile%\Documents\GitHub\Windows-Aliases\mymacros.txt
-hosts=gvim %windir%\System32\drivers\etc\hosts
-vimrc=gvim "c:\Program Files (x86)\Vim\_vimrc"
+bashrc=%editor% %userprofile%\Documents\GitHub\Windows-Aliases\mymacros.txt
+hosts=%editor% %windir%\System32\drivers\etc\hosts
+vimrc=%editor% "c:\Program Files (x86)\Vim\_vimrc"
 
 ;= directory shortcuts 
 home=cd /d %userprofile%
