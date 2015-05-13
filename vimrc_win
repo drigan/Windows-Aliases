@@ -1,4 +1,7 @@
 set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
 
 colorscheme pablo
 set hlsearch
@@ -148,3 +151,4 @@ set backupdir=~/vimtmp,C:\WINDOWS\Temp,.
 set backupskip=~/vimtmp,C:\WINDOWS\Temp,.
 set directory=~/vimtmp,C:\WINDOWS\Temp,.
 set writebackup
+
