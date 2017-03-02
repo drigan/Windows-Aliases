@@ -54,3 +54,28 @@ C:\Users\landj01\Documents\GitHub\FranklinFueling\www.franklinfueling.com\config
 # Copy and edit a line to set the new value.
 # Add item to the redirector page: http://www.franklinfueling.com/umbraco/umbraco.aspx#content
 
+######################################################################
+############################# GREP ###################################
+######################################################################
+
+# Find the word "sync" inside all files inside a folder.
+grep -rin sync
+
+######################################################################
+############################  FFS  ###################################
+######################################################################
+# Add Literature Request
+Under Settings -> Dictionary -> Literature Fulfillment Create a new node like "FFS0494"
+Add labels for all necessary languages, i.e. "FFS-0494 FFS Pro: University Brochure"
+Save.
+
+Under Settings -> Templates -> Site Master -> Region Master edit "Region Literature Request"
+Copy a div like the following and add it into the list:
+<div class="simpleFormsField document">
+    <input id="FFS0494" width="30" type="text" runat="server"/><label for="eight" class="fieldLabel"><umbraco:item field="#FFS0494" runat="server"/></label>
+</div>
+Save.
+
+Find the page in the content (Regions -> Americas -> More -> Resources -> Order Literature)
+Save and publish.
+
