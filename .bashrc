@@ -4,10 +4,10 @@
 ##############################################################################
  
 if [[ $- != *i* ]] ; then
-         # Shell is non-interactive.  Be done now!
-         return
+     # Shell is non-interactive.  Be done now!
+     return
 fi
- 
+
 #enable bash completion
 [ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
  
@@ -48,15 +48,15 @@ set -o ignoreeof        # stops ctrl+d from logging me out
  
 # Set appropriate ls alias
 case $(uname -s) in
-        Darwin|FreeBSD)
-                alias ls="ls -hFG"
-        ;;
-        Linux)
-                alias ls="ls --color=always -hF"
-        ;;
-        NetBSD|OpenBSD)
-                alias ls="ls -hF"
-        ;;
+    Darwin|FreeBSD)
+        alias ls="ls -hFG"
+    ;;
+    Linux)
+        alias ls="ls --color=always -hF"
+    ;;
+    NetBSD|OpenBSD)
+        alias ls="ls -hF"
+    ;;
 esac
  
 alias rm="rm -i"
@@ -73,35 +73,55 @@ alias lsd="ls -hdlf */"
 
 # bash program renames:
 alias open="open ."
+
+# Git commands
+
 alias ga="git add --all ."
-alias gb="git branch"
-alias gc="git commit -a"
-alias gcout="git checkout"
-alias gd="git diff"
-alias gf="git fetch"
-alias gl="git log"
-alias gm="git merge"
-alias gpl="git pull"
-alias gps="git push"
-alias gr="git remove -v"
-alias gs="git status"
-alias gunadd="git reset --keep"
+alias gb="git branch "
+alias gc="git commit -a "
+alias gcout="git checkout "
+alias gd="git diff "
+alias gf="git fetch "
+alias gl="git log "
+alias gm="git merge "
+alias gpl="git pull "
+alias gps="git push "
+alias gr="git remote -v "
+alias grevert="git reset --hard HEAD"
+alias gs="git status "
+alias gunadd="git reset --keep "
 alias gunstash="git stash apply "
+alias cellos="say -v cellos"
 
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true"
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false"
 
 # shortcuts
-alias downloads="cd /Users/landj01/Downloads"
-alias documents="cd /Users/landj01/Documents"
+alias downloads="cd ~/Downloads"
+alias documents="cd ~/Documents"
+alias gh="cd ~/github"
 alias udev="cd /Volumes/Corporate\ Communications/Umbraco\ Dev/"
 alias web="cd /webapps"
+alias home="cd ~"
 
 # edit important documents
+alias gvim="gvim -p"
 alias vimrc="gvim ~/.vimrc"
 alias bashrc="gvim ~/.bashrc"
+alias profile="gvim ~/.profile"
+alias remember="gvim ~/stuff.txt"
+alias makedjango="gvim ~/github/make-django.txt"
 alias hosts="sudo gvim /private/etc/hosts"
+alias artist="bash ~/vagary.sh github/gswd/gswd-adam-artist/projects/artist01"
+alias bodybuilder="bash ~/vagary.sh github/gswd/gswd-vagrant-dev3/projects/onebodysoftware"
+alias allauth="bash ~/vagary.sh github/gswd/gswd-vagrant-dev2/projects/allauth08"
+alias example="bash ~/vagary.sh github/gswd/gswd-vagrant-allauth-example/projects/example"
+alias wiki="bash ~/vagary.sh github/gswd/gswd-vagrant-wiki/projects/wiki"
+alias work="bash ~/vagary.sh github/gswd/gswd-vagrant-dev3/projects/bb"
+alias obs="bash ~/vagary.sh github/gswd/gswd-vagrant-dev3/projects/obs"
  
+# VirtualEnvWrapper
+source /usr/local/bin/virtualenvwrapper.sh 
 #PS1='\h:\W \u\$ '
 # Make bash check its window size after a process completes
  
@@ -144,11 +164,11 @@ txtrst='\e[0m'    # Text Reset
 ##############################################################################
  
 if [ $(id -u) -eq 0 ];
-        then # you are root, set red colour prompt
-                export PS1="[\[$txtred\]\u\[$txtylw\]@\[$txtrst\]\h] \[$txtgrn\]\W\[$txtrst\]# "
-        else
-                export PS1="\[$txtpur\]\u\[$txtred\]@\[$txtblu\]\h \[$txtgrn\]\W \[$txtrst\]$ "
-                export SUDO_PS1="[\[$txtred\]\u\[$txtylw\]@\[$txtrst\]\h] \[$txtgrn\]\W\[$txtrst\]# "
+    then # you are root, set red colour prompt
+        export PS1="[\[$txtred\]\u\[$txtylw\]@\[$txtrst\]\h] \[$txtgrn\]\W\[$txtrst\]# "
+    else
+        export PS1="\[$txtpur\]\u\[$txtred\]@\[$txtblu\]\h \[$txtgrn\]\W \[$txtrst\]$ "
+        export SUDO_PS1="[\[$txtred\]\u\[$txtylw\]@\[$txtrst\]\h] \[$txtgrn\]\W\[$txtrst\]# "
 fi
  
 export GREP_OPTIONS=--color=auto
@@ -171,13 +191,12 @@ ssh-del() {
 }
  
 psgrep() {
-        if [ ! -z $1 ] ; then
-                echo "Grepping for processes matching $1..."
-                ps aux | grep $1 | grep -v grep
-        else
- 
-                echo "!! Need name to grep for"
-        fi
+    if [ ! -z $1 ] ; then
+        echo "Grepping for processes matching $1..."
+        ps aux | grep $1 | grep -v grep
+    else
+        echo "!! Need name to grep for"
+    fi
 }
  
 # clock - a little clock that appeares in the terminal window.
@@ -195,7 +214,30 @@ showip ()
 {
 lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | awk '{ print $4 }' | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g' 
 }
+
+# Call virtualenvwrapper's "workon" if .venv exists.  This is modified from--
+# http://justinlilly.com/python/virtualenv_wrapper_helper.html
+# which is linked from--
+# http://virtualenvwrapper.readthedocs.org/en/latest/tips.html#automatically-run-workon-when-entering-a-directory
+check_virtualenv() {
+    if [ -e .venv ]; then
+        env=`cat .venv`
+        if [ "$env" != "${VIRTUAL_ENV##*/}" ]; then
+            echo "Found .venv in directory. Calling: workon ${env}"
+            workon $env
+        fi
+    fi
+}
+venv_cd () {
+    builtin cd "$@" && check_virtualenv
+}
+# Call check_virtualenv in case opening directly into a directory (e.g
+# when opening a new tab in Terminal.app).
+check_virtualenv
  
+# Add the following to ~/.bash_aliases:
+alias cd="venv_cd"
+
 ##################
 #extract files eg: ex tarball.tar#
 ##################
@@ -219,3 +261,6 @@ ex () {
         echo "'$1' is not a valid file"
     fi
 }
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
