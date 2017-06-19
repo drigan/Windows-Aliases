@@ -79,3 +79,29 @@ Save.
 Find the page in the content (Regions -> Americas -> More -> Resources -> Order Literature)
 Save and publish.
 
+
+######################################################################
+############################  ISR  ###################################
+######################################################################
+We need two aliases pointed to 10.255.0.92 Internal DNS as soon as possible:
+chinaws.dev
+fpsbr.dev
+
+These should look similar to naws.dev.
+
+If added correctly, browsing to http://chinaws.dev should give you a site that looks very similar to franklinwater.eu.
+
+We have 10 other aliases that we know will need to be pointed to 10.255.0.92 but are slightly less urgent.  This is a list of all the internal aliases that we know we will need before the end of the year.  (but more may come along before then.):
+
+apac.dev
+aseanws.dev
+ausws.dev
+cz.dev
+fehub.dev
+ffsverify.dev
+franklintech.dev
+impo.dev
+koreaws.dev
+pluga.dev
+
+Thank you!
