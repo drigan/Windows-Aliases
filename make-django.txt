@@ -3,7 +3,7 @@
 #############################################
 ############ Environment Setup ##############
 sudo ./postinstall.sh 
-sudo apt-get install libpq-dev python-dev python-pip vim-gnome
+sudo apt-get install libpq-dev python-dev python3-pip vim
 
 #  Install the Heroku toolbelt:
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
